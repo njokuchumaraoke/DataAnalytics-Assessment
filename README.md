@@ -1,5 +1,5 @@
 ![image](https://github.com/user-attachments/assets/c46dba7a-6626-4d52-94b0-f4b39cfbdfd6) 
-<h1 align="center">Cowrywise Data Analytics Assessment</h1>
+<h1 align="center">Data Analytics Assessment</h1>
 
 ## Overview
 
