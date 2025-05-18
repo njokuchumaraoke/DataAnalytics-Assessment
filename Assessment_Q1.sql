@@ -36,7 +36,7 @@ SELECT
     CONCAT(u.first_name, ' ', u.last_name) AS name,  -- concatentaion of the first name and last name of the user
     s.savings_count,  -- Number of savings plans
     i.investment_count,  -- Number of investment plans
-    ROUND(s.savings_total + i.investment_total, 2) AS total_deposits  -- Combined deposits from both savings and investments, rounded to 2 decimals
+    ROUND((s.savings_total + i.investment_total) / 100.0, 2) AS total_deposits  -- Combined deposits from both savings and investments, divide by 100 to convert kobo to naira, rounded to 2 decimals
 FROM users_customuser u
 -- Ensure we only include users who have both savings and investments
 INNER JOIN savings s ON u.id = s.owner_id
