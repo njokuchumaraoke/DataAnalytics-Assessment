@@ -8,7 +8,7 @@ WITH user_transactions AS (
   SELECT
     s.owner_id,  -- User ID
     COUNT(*) AS total_transactions,  -- Total number of transactions made by the user
-    SUM(s.amount * 0.001) AS total_profit  -- Assume each transaction yields 0.1% profit (as CLV contribution)
+    SUM(s.amount * 0.001 / 100.0) AS total_profit_naira  -- Assume each transaction yields 0.1% profit and convert kobo to naira (as CLV contribution)
   FROM savings_savingsaccount s
   GROUP BY s.owner_id
 ),
@@ -35,7 +35,7 @@ SELECT
   ROUND(
     (t.total_transactions / NULLIF(ut.tenure_months, 0))  -- Avoid division by zero for new users
     * 12                                                  -- Project monthly behavior across a year
-    * (t.total_profit / NULLIF(t.total_transactions, 0)), -- Average profit per transaction
+    * (t.total_profit_naira / NULLIF(t.total_transactions, 0)), -- Average profit per transaction
     2                                                     -- Round the result to 2 decimal places
   ) AS estimated_clv
 
